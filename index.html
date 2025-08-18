@@ -3,437 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baca LN - Nama Light Novel</title>
-    <style>
-        :root {
-            --light-bg: #ffffff;
-            --dark-bg: #121212;
-            --light-text: #000000;
-            --dark-text: #ffffff;
-            --header-bg: #d9abab;
-            --switch-color: #ff69b4; /* Pink color for switch */
-            --border-radius: 8px;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.5s, color 0.5s;
-            background-color: var(--light-bg);
-            color: var(--light-text);
-        }
-
-        /* Dark Mode styles */
-        body.dark-mode {
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-        }
-
-        .header {
-            background-color: var(--header-bg);
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .header .logo-center {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .theme-switch {
-            display: flex;
-            align-items: center;
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 20px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 20px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 2px;
-            bottom: 2px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: var(--switch-color);
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(20px);
-        }
-
-        .main-content {
-            padding: 20px;
-            max-width: 900px;
-            margin: auto;
-        }
-
-        .novel-intro {
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            padding-bottom: 20px;
-        }
-
-        .novel-intro::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: var(--bg-cover-url);
-            background-size: cover;
-            background-position: center;
-            filter: blur(10px);
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        .cover-image {
-            width: 200px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: var(--border-radius);
-            margin-right: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .novel-details {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-        }
-
-        .novel-title {
-            font-size: 32px;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .synopsis {
-            line-height: 1.6;
-        }
-
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .info-table th, .info-table td {
-            text-align: left;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        body.dark-mode .info-table td, body.dark-mode .info-table th {
-            border-bottom: 1px solid #333;
-        }
-
-        .genre-label {
-            display: inline-block;
-            background-color: #eee;
-            color: #555;
-            padding: 5px 10px;
-            border-radius: 15px;
-            margin-right: 5px;
-            font-size: 14px;
-        }
-        
-        body.dark-mode .genre-label {
-            background-color: #333;
-            color: #ccc;
-        }
-
-        .chapter-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 30px;
-        }
-
-        .chapter-list {
-            list-style: none;
-            padding: 0;
-            width: 100%;
-        }
-
-        .chapter-item {
-            border-bottom: 1px solid #ddd;
-            padding: 15px 0;
-        }
-        
-        body.dark-mode .chapter-item {
-            border-bottom: 1px solid #333;
-        }
-
-        .chapter-item a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        
-        .chapter-item a:hover {
-            color: #d9abab;
-        }
-
-        .comment-section {
-            margin-top: 40px;
-        }
-
-        .comment-form textarea {
-            width: 100%;
-            height: 100px;
-            padding: 10px;
-            border-radius: var(--border-radius);
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            resize: vertical;
-        }
-        
-        body.dark-mode .comment-form textarea {
-            background-color: #222;
-            color: var(--dark-text);
-            border: 1px solid #555;
-        }
-        
-        .comment-form button {
-            background-color: #d9abab;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .comment-list {
-            margin-top: 20px;
-        }
-
-        .comment {
-            border: 1px solid #eee;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-bottom: 10px;
-        }
-        
-        body.dark-mode .comment {
-            border: 1px solid #333;
-            background-color: #1a1a1a;
-        }
-
-        .footer {
-            background-color: var(--header-bg);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        .social-media a {
-            margin: 0 10px;
-            color: white;
-            font-size: 24px;
-            text-decoration: none;
-        }
-    </style>
+    <title>Baca LN</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="header">
-        <div class="logo">Baca LN</div>
-        <div class="logo-center">
-            <img src="https://via.placeholder.com/50x50.png?text=LOGO" alt="Logo" style="height: 50px;">
+    <header class="top-bar">
+        <div class="top-bar-left">
+            <h1 class="logo-text">Baca LN</h1>
         </div>
-        <div class="theme-switch">
+        <div class="top-bar-center">
+            <img src="logo-ln.png" alt="Logo Baca LN" class="main-logo">
+        </div>
+        <div class="top-bar-right">
             <label class="switch">
                 <input type="checkbox" id="theme-toggle">
-                <span class="slider"></span>
+                <span class="slider round"></span>
             </label>
         </div>
-    </div>
+    </header>
 
-    <div class="main-content">
-        <div class="novel-intro">
-            <img class="cover-image" src="https://via.placeholder.com/200x300.png?text=Cover+LN" alt="Cover Light Novel">
-            <div class="novel-details">
-                <h1 class="novel-title">Judul Light Novel</h1>
-                <p class="synopsis">
-                    Ini adalah sinopsis singkat dari Light Novel. Cerita ini mengikuti petualangan seorang pahlawan yang harus menyelamatkan dunia dari kegelapan.
-                    Ia memulai perjalanannya dengan sebuah misi misterius yang akan mengubah takdirnya selamanya.
+    <main class="main-content">
+        <div class="ln-hero-section">
+            <div class="blurred-bg"></div>
+            <div class="ln-cover-container">
+                <img src="cover-ln.jpg" alt="Cover Light Novel" class="ln-cover-image">
+            </div>
+            <div class="ln-info-container">
+                <h2 class="ln-title">Judul Light Novel</h2>
+                <p class="ln-synopsis">
+                    Ini adalah sinopsis singkat dari light novel tersebut. Ceritanya berkisah tentang petualangan epik seorang pahlawan yang harus menyelamatkan dunia dari kegelapan.
                 </p>
-            </div>
-        </div>
 
-        <table class="info-table">
-            <thead>
-                <tr>
-                    <th>Info</th>
-                    <th>Detail</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Title (EN)</td>
-                    <td>Light Novel Title</td>
-                </tr>
-                <tr>
-                    <td>Judul (ID)</td>
-                    <td>Judul Light Novel</td>
-                </tr>
-                <tr>
-                    <td>Tanggal Rilis</td>
-                    <td>18 Agustus 2025</td>
-                </tr>
-                <tr>
-                    <td>Status</td>
-                    <td>Ongoing</td>
-                </tr>
-                <tr>
-                    <td>Penulis</td>
-                    <td>Nama Penulis</td>
-                </tr>
-                <tr>
-                    <td>Genre</td>
-                    <td>
-                        <span class="genre-label">Fantasy</span>
-                        <span class="genre-label">Adventure</span>
-                        <span class="genre-label">Isekai</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                <div class="ln-details">
+                    <table>
+                        <tr>
+                            <td><strong>Title:</strong></td>
+                            <td id="en-title">Light Novel Title</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Judul:</strong></td>
+                            <td id="id-title">Judul Light Novel</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tanggal Rilis:</strong></td>
+                            <td id="release-date">12 Mei 2025</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status:</strong></td>
+                            <td><span class="status-badge ongoing">Ongoing</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Penulis:</strong></td>
+                            <td id="author">Nama Penulis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Genre:</strong></td>
+                            <td>
+                                <span class="genre-badge">Fantasi</span>
+                                <span class="genre-badge">Aksi</span>
+                                <span class="genre-badge">Romansa</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
-        <div class="chapter-section">
-            <h2>Daftar Bab / Chapters</h2>
-            <div class="language-select">
-                <select id="lang-select">
-                    <option value="id">Bahasa Indonesia</option>
-                    <option value="en">English</option>
-                </select>
-            </div>
-        </div>
-        
-        <ul class="chapter-list">
-            <li class="chapter-item lang-id">
-                <a href="#">Bab 1: Awal Petualangan</a>
-            </li>
-            <li class="chapter-item lang-en">
-                <a href="#">Chapter 1: The Beginning of an Adventure</a>
-            </li>
-            <li class="chapter-item lang-id">
-                <a href="#">Bab 2: Pertemuan Tak Terduga</a>
-            </li>
-            <li class="chapter-item lang-en">
-                <a href="#">Chapter 2: An Unexpected Encounter</a>
-            </li>
-        </ul>
-
-        <div class="comment-section">
-            <h2>Komentar</h2>
-            <div class="comment-form">
-                 <textarea id="commentInput" placeholder="Tulis komentar kamu di sini..."></textarea>
-    <button id="submitCommentBtn">Kirim Komentar</button>
-            </div>
-            <div class="comment-list" id="commentList">
-                <div class="comment">
-                    <strong>Nama Pengguna:</strong> Ini adalah contoh komentar.
+                <div class="language-selector-container">
+                    <label for="language-select">Pilih Bahasa:</label>
+                    <select id="language-select">
+                        <option value="id">Indonesia</option>
+                        <option value="en">English</option>
+                    </select>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="footer">
+        <div class="chapter-list-container">
+            <h3>Daftar Bab</h3>
+            <div class="chapter-list" id="id-chapters">
+                <a href="#" class="chapter-item">Bab 1: Awal Petualangan</a>
+                <a href="#" class="chapter-item">Bab 2: Pertemuan Tak Terduga</a>
+                <a href="#" class="chapter-item">Bab 3: Kekuatan Tersembunyi</a>
+            </div>
+            <div class="chapter-list hidden" id="en-chapters">
+                <a href="#" class="chapter-item">Chapter 1: The Beginning of an Adventure</a>
+                <a href="#" class="chapter-item">Chapter 2: An Unexpected Encounter</a>
+                <a href="#" class="chapter-item">Chapter 3: The Hidden Power</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="bottom-bar">
         <div class="social-media">
             <a href="https://instagram.com" target="_blank">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v1/icons/instagram.svg" alt="Instagram" style="height: 24px;">
+                <img src="instagram-logo.png" alt="Instagram">
             </a>
             <a href="https://twitter.com" target="_blank">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v1/icons/x.svg" alt="Twitter/X" style="height: 24px;">
+                <img src="twitter-logo.png" alt="Twitter">
             </a>
             <a href="https://tiktok.com" target="_blank">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v1/icons/tiktok.svg" alt="Tiktok" style="height: 24px;">
+                <img src="tiktok-logo.png" alt="TikTok">
             </a>
         </div>
-    </div>
-    
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-        const langSelect = document.getElementById('lang-select');
-        const chapterItems = document.querySelectorAll('.chapter-item');
+    </footer>
 
-        // Theme Switch functionality
-        themeToggle.addEventListener('change', () => {
-            body.classList.toggle('dark-mode');
-            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
-        });
-
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-mode');
-            themeToggle.checked = true;
-        }
-
-        // Language Switch functionality
-        langSelect.addEventListener('change', () => {
-            const selectedLang = langSelect.value;
-            chapterItems.forEach(item => {
-                if (item.classList.contains('lang-' + selectedLang)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        });
-
-        // Set initial language display
-        langSelect.dispatchEvent(new Event('change'));
-
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
