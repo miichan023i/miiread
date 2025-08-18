@@ -1,148 +1,436 @@
-OCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Light Novel Reader</title>
+    <title>Baca LN - Nama Light Novel</title>
     <style>
-        /* CSS dasar untuk styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f4f4f4;
-            color: #333;
+        :root {
+            --light-bg: #ffffff;
+            --dark-bg: #121212;
+            --light-text: #000000;
+            --dark-text: #ffffff;
+            --header-bg: #d9abab;
+            --switch-color: #ff69b4; /* Pink color for switch */
+            --border-radius: 8px;
         }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s, color 0.5s;
+            background-color: var(--light-bg);
+            color: var(--light-text);
+        }
+
+        /* Dark Mode styles */
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
         .header {
-            border-bottom: 5px solid #D9abab;
+            background-color: var(--header-bg);
+            color: white;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
         }
-        .header .logo a {
+
+        .header .logo {
             font-size: 24px;
             font-weight: bold;
-            text-decoration: none;
-            color: inherit;
         }
-        .header .settings {
-            cursor: pointer;
-            font-size: 24px;
-        }
-        .settings-menu {
-            display: none;
+
+        .header .logo-center {
             position: absolute;
-            top: 60px;
-            right: 20px;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            left: 50%;
+            transform: translateX(-50%);
         }
-        .settings-menu a {
-            display: block;
-            padding: 5px 0;
-            text-decoration: none;
-            color: #333;
-        }
-        .novel-list {
+
+        .theme-switch {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            align-items: center;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--switch-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .main-content {
             padding: 20px;
+            max-width: 900px;
+            margin: auto;
         }
-        .novel-item {
-            text-align: center;
-            width: 150px;
+
+        .novel-intro {
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 20px;
         }
-        .novel-item img {
+
+        .novel-intro::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            border-radius: 5px;
+            height: 100%;
+            background-image: var(--bg-cover-url);
+            background-size: cover;
+            background-position: center;
+            filter: blur(10px);
+            z-index: -1;
+            opacity: 0.3;
         }
-        .novel-item .title {
-            margin-top: 10px;
-            font-size: 14px;
+
+        .cover-image {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-right: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .novel-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .novel-title {
+            font-size: 32px;
             font-weight: bold;
+            margin: 0;
+        }
+
+        .synopsis {
+            line-height: 1.6;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .info-table th, .info-table td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        body.dark-mode .info-table td, body.dark-mode .info-table th {
+            border-bottom: 1px solid #333;
+        }
+
+        .genre-label {
+            display: inline-block;
+            background-color: #eee;
+            color: #555;
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin-right: 5px;
+            font-size: 14px;
+        }
+        
+        body.dark-mode .genre-label {
+            background-color: #333;
+            color: #ccc;
+        }
+
+        .chapter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .chapter-list {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        .chapter-item {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+        
+        body.dark-mode .chapter-item {
+            border-bottom: 1px solid #333;
+        }
+
+        .chapter-item a {
             text-decoration: none;
             color: inherit;
+            display: block;
         }
-        .comments-section {
-            padding: 20px;
-            border-top: 1px solid #ccc;
+        
+        .chapter-item a:hover {
+            color: #d9abab;
         }
-        .comments-section textarea {
+
+        .comment-section {
+            margin-top: 40px;
+        }
+
+        .comment-form textarea {
             width: 100%;
             height: 100px;
-            margin-top: 10px;
             padding: 10px;
+            border-radius: var(--border-radius);
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            resize: vertical;
         }
+        
+        body.dark-mode .comment-form textarea {
+            background-color: #222;
+            color: var(--dark-text);
+            border: 1px solid #555;
+        }
+        
+        .comment-form button {
+            background-color: #d9abab;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .comment-list {
+            margin-top: 20px;
+        }
+
+        .comment {
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 10px;
+        }
+        
+        body.dark-mode .comment {
+            border: 1px solid #333;
+            background-color: #1a1a1a;
+        }
+
         .footer {
+            background-color: var(--header-bg);
+            color: white;
             text-align: center;
             padding: 20px;
-            border-top: 1px solid #ccc;
+            margin-top: 40px;
         }
-        .footer a {
+
+        .social-media a {
             margin: 0 10px;
+            color: white;
+            font-size: 24px;
             text-decoration: none;
-            color: #333;
         }
     </style>
 </head>
 <body>
-
     <div class="header">
-        <div class="logo">
-            <a href="index.html">Light Novel Reader</a>
-          <img src="https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-2714-61f7-b6c5-dd7a48a71d8a/raw?se=2025-08-18T15%3A07%3A46Z&sp=r&sv=2024-08-04&sr=b&scid=e9701303-82f4-519c-b6b2-fb675bb0f4a7&skoid=9ccea605-1409-4478-82eb-9c83b25dc1b0&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-08-17T22%3A47%3A44Z&ske=2025-08-18T22%3A47%3A44Z&sks=b&skv=2024-08-04&sig=fIFcqhHfjzg87xYknP4g9PNWXFkzpULwMBJoYVjoeu4%3D" alt="Logo Light Novel Reader" width="150">
+        <div class="logo">Baca LN</div>
+        <div class="logo-center">
+            <img src="https://via.placeholder.com/50x50.png?text=LOGO" alt="Logo" style="height: 50px;">
         </div>
-        <div class="settings">
-            ⚙️
-            <div class="settings-menu" id="settingsMenu">
-                <a href="#">Mode Terang/Gelap</a>
-                <a href="#">Akun</a>
-                <a href="#">Bookmark</a>
-                <a href="#">Riwayat Baca</a>
-            </div>
+        <div class="theme-switch">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
         </div>
     </div>
 
-    <main>
-        <div class="novel-list">
-            <div class="novel-item">
-                <a href="#">
-                    <img src="https://via.placeholder.com/150x200" alt="Cover Light Novel 1">
-                    <div class="title">Judul Light Novel 1</div>
-                </a>
+    <div class="main-content">
+        <div class="novel-intro">
+            <img class="cover-image" src="https://via.placeholder.com/200x300.png?text=Cover+LN" alt="Cover Light Novel">
+            <div class="novel-details">
+                <h1 class="novel-title">Judul Light Novel</h1>
+                <p class="synopsis">
+                    Ini adalah sinopsis singkat dari Light Novel. Cerita ini mengikuti petualangan seorang pahlawan yang harus menyelamatkan dunia dari kegelapan.
+                    Ia memulai perjalanannya dengan sebuah misi misterius yang akan mengubah takdirnya selamanya.
+                </p>
             </div>
-            <div class="novel-item">
-                <a href="#">
-                    <img src="https://via.placeholder.com/150x200" alt="Cover Light Novel 2">
-                    <div class="gyaru no himitsu">Judul Light Novel 2</div>
-                </a>
-            </div>
-            </div>
-
-        <div class="comments-section">
-            <h2>Komentar</h2>
-            <textarea placeholder="Tulis komentar Anda di sini..." disabled></textarea>
-            <p>Silakan login atau buat akun untuk dapat menulis komentar.</p>
         </div>
-    </main>
+
+        <table class="info-table">
+            <thead>
+                <tr>
+                    <th>Info</th>
+                    <th>Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Title (EN)</td>
+                    <td>Light Novel Title</td>
+                </tr>
+                <tr>
+                    <td>Judul (ID)</td>
+                    <td>Judul Light Novel</td>
+                </tr>
+                <tr>
+                    <td>Tanggal Rilis</td>
+                    <td>18 Agustus 2025</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>Ongoing</td>
+                </tr>
+                <tr>
+                    <td>Penulis</td>
+                    <td>Nama Penulis</td>
+                </tr>
+                <tr>
+                    <td>Genre</td>
+                    <td>
+                        <span class="genre-label">Fantasy</span>
+                        <span class="genre-label">Adventure</span>
+                        <span class="genre-label">Isekai</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="chapter-section">
+            <h2>Daftar Bab / Chapters</h2>
+            <div class="language-select">
+                <select id="lang-select">
+                    <option value="id">Bahasa Indonesia</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+        
+        <ul class="chapter-list">
+            <li class="chapter-item lang-id">
+                <a href="#">Bab 1: Awal Petualangan</a>
+            </li>
+            <li class="chapter-item lang-en">
+                <a href="#">Chapter 1: The Beginning of an Adventure</a>
+            </li>
+            <li class="chapter-item lang-id">
+                <a href="#">Bab 2: Pertemuan Tak Terduga</a>
+            </li>
+            <li class="chapter-item lang-en">
+                <a href="#">Chapter 2: An Unexpected Encounter</a>
+            </li>
+        </ul>
+
+        <div class="comment-section">
+            <h2>Komentar</h2>
+            <div class="comment-form">
+                <textarea placeholder="Tulis komentar kamu di sini..."></textarea>
+                <button>Kirim Komentar</button>
+            </div>
+            <div class="comment-list">
+                <div class="comment">
+                    <strong>Nama Pengguna:</strong> Ini adalah contoh komentar.
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="footer">
-        <p>Hubungi Kami:</p>
-        <a href="https://www.tiktok.com/@mii_chan02i" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046128.png" alt="TikTok" width="30"> @username_tiktok
-        </a>
-        <a href="https://twitter.com/MII_Chan02I" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width="30"> @username_twitter
-        </a>
-        <a href="https://www.instagram.com/mii_chan02i" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" width="30"> @username_instagram
-        </a>
+        <div class="social-media">
+            <a href="https://instagram.com" target="_blank">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v1/icons/instagram.svg" alt="Instagram" style="height: 24px;">
+            </a>
+            <a href="https://twitter.com" target="_blank">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v1/icons/x.svg" alt="Twitter/X" style="height: 24px;">
+            </a>
+            <a href="https://tiktok.com" target="_blank">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v1/icons/tiktok.svg" alt="Tiktok" style="height: 24px;">
+            </a>
+        </div>
     </div>
+    
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const langSelect = document.getElementById('lang-select');
+        const chapterItems = document.querySelectorAll('.chapter-item');
 
+        // Theme Switch functionality
+        themeToggle.addEventListener('change', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.checked = true;
+        }
+
+        // Language Switch functionality
+        langSelect.addEventListener('change', () => {
+            const selectedLang = langSelect.value;
+            chapterItems.forEach(item => {
+                if (item.classList.contains('lang-' + selectedLang)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Set initial language display
+        langSelect.dispatchEvent(new Event('change'));
+
+    </script>
 </body>
 </html>
