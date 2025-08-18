@@ -4,66 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bab 1 - Judul Light Novel</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
     <header class="top-header">
-        <a href="#" class="logo-text">BacaLN</a>
-        <div class="header-center">
-            <img src="https://via.placeholder.com/100x50.png?text=Logo" alt="Logo" class="logo-img">
-        </div>
-        <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" />
-                <div class="slider round"></div>
-            </label>
+        <div class="header-container">
+            <div class="header-item left">
+                <a href="index.html" class="logo-text">BacaLN</a>
+            </div>
+            <div class="header-item center">
+                <img src="logo-placeholder.png" alt="Logo" class="logo">
+            </div>
+            <div class="header-item right">
+                <div class="dark-mode-toggle">
+                    <input type="checkbox" id="dark-mode-toggle-checkbox">
+                    <label for="dark-mode-toggle-checkbox" class="toggle-label"></label>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="container">
-        <div class="illustration-container">
-            <img src="https://via.placeholder.com/800x400.png?text=Ilustrasi+Bab+1" alt="Ilustrasi Bab 1" class="illustration-img">
-        </div>
-        
-        <article class="chapter-content">
-            <h1>Bab 1: Judul Bab</h1>
+    <main class="content-container">
+        <section class="chapter-content">
+            <h1 class="chapter-title">Bab 1: Judul Bab Pertama</h1>
+            <div class="illustration-container">
+                <img src="https://via.placeholder.com/800x400.png?text=Ilustrasi+Bab+1" alt="Ilustrasi Bab 1" class="illustration">
+            </div>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Ini adalah paragraf pertama dari bab 1. Tuliskan isi cerita Anda di sini. 
+                Anda bisa menambahkan paragraf sebanyak yang Anda butuhkan untuk mengisi bab ini.
+                Pastikan untuk memecah teks menjadi paragraf yang lebih kecil agar lebih mudah dibaca.
             </p>
             <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lanjutkan cerita Anda di sini. Deskripsikan karakter, latar, dan peristiwa penting yang terjadi.
+                Anda juga bisa menambahkan dialog antar karakter untuk membuat cerita lebih hidup.
             </p>
             <p>
-                (Isi babnya bisa dilanjutkan di sini...)
+                ...dan seterusnya.
             </p>
-        </article>
-        
-        <nav class="chapter-navigation">
-            <a href="#" class="nav-button prev-btn">
-                <span class="symbol">&lt;</span>
-            </a>
-            <a href="index.html" class="nav-button home-btn">
-                <span class="symbol">&Hat;</span>
-            </a>
-            <a href="#" class="nav-button next-btn">
-                <span class="symbol">&gt;</span>
-            </a>
-        </nav>
+        </section>
     </main>
 
-    <footer class="bottom-footer">
-        <a href="https://instagram.com" target="_blank" class="social-icon">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@3.13.0/icons/instagram.svg" alt="Instagram">
-        </a>
-        <a href="https://twitter.com" target="_blank" class="social-icon">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@3.13.0/icons/x.svg" alt="Twitter">
-        </a>
-        <a href="https://tiktok.com" target="_blank" class="social-icon">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@3.13.0/icons/tiktok.svg" alt="TikTok">
-        </a>
+    <div class="navigation-bar">
+        <a href="previous-chapter.html" class="nav-link prev"><i class="fas fa-chevron-left"></i></a>
+        <a href="index.html" class="nav-link home"><i class="fas fa-chevron-up"></i></a>
+        <a href="next-chapter.html" class="nav-link next"><i class="fas fa-chevron-right"></i></a>
+    </div>
+
+    <footer class="bottom-header">
+        <div class="social-media">
+            <a href="https://www.instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.twitter.com" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.tiktok.com" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script2.js"></script>
 </body>
 </html>
