@@ -1,0 +1,148 @@
+OCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Novel Reader</title>
+    <style>
+        /* CSS dasar untuk styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            border-bottom: 5px solid #D9abab;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .header .logo a {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: inherit;
+        }
+        .header .settings {
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .settings-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .settings-menu a {
+            display: block;
+            padding: 5px 0;
+            text-decoration: none;
+            color: #333;
+        }
+        .novel-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .novel-item {
+            text-align: center;
+            width: 150px;
+        }
+        .novel-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .novel-item .title {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            color: inherit;
+        }
+        .comments-section {
+            padding: 20px;
+            border-top: 1px solid #ccc;
+        }
+        .comments-section textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #ccc;
+        }
+        .footer a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">
+            <a href="index.html">Light Novel Reader</a>
+          <img src="https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-2714-61f7-b6c5-dd7a48a71d8a/raw?se=2025-08-18T15%3A07%3A46Z&sp=r&sv=2024-08-04&sr=b&scid=e9701303-82f4-519c-b6b2-fb675bb0f4a7&skoid=9ccea605-1409-4478-82eb-9c83b25dc1b0&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-08-17T22%3A47%3A44Z&ske=2025-08-18T22%3A47%3A44Z&sks=b&skv=2024-08-04&sig=fIFcqhHfjzg87xYknP4g9PNWXFkzpULwMBJoYVjoeu4%3D" alt="Logo Light Novel Reader" width="150">
+        </div>
+        <div class="settings">
+            ⚙️
+            <div class="settings-menu" id="settingsMenu">
+                <a href="#">Mode Terang/Gelap</a>
+                <a href="#">Akun</a>
+                <a href="#">Bookmark</a>
+                <a href="#">Riwayat Baca</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="novel-list">
+            <div class="novel-item">
+                <a href="#">
+                    <img src="https://via.placeholder.com/150x200" alt="Cover Light Novel 1">
+                    <div class="title">Judul Light Novel 1</div>
+                </a>
+            </div>
+            <div class="novel-item">
+                <a href="#">
+                    <img src="https://via.placeholder.com/150x200" alt="Cover Light Novel 2">
+                    <div class="gyaru no himitsu">Judul Light Novel 2</div>
+                </a>
+            </div>
+            </div>
+
+        <div class="comments-section">
+            <h2>Komentar</h2>
+            <textarea placeholder="Tulis komentar Anda di sini..." disabled></textarea>
+            <p>Silakan login atau buat akun untuk dapat menulis komentar.</p>
+        </div>
+    </main>
+
+    <div class="footer">
+        <p>Hubungi Kami:</p>
+        <a href="https://www.tiktok.com/@mii_chan02i" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046128.png" alt="TikTok" width="30"> @username_tiktok
+        </a>
+        <a href="https://twitter.com/MII_Chan02I" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width="30"> @username_twitter
+        </a>
+        <a href="https://www.instagram.com/mii_chan02i" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" width="30"> @username_instagram
+        </a>
+    </div>
+
+</body>
+</html>
