@@ -3,105 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baca LN</title>
-    <link rel="stylesheet" href="style.css">
+    <title>NovaRead - Platform Baca Light Novel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .novel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .genre-tag {
+            transition: all 0.3s ease;
+        }
+        .genre-tag:hover {
+            background-color: #4f46e5;
+            color: white;
+        }
+        .chapter-list li:hover {
+            background-color: #f3f4f6;
+        }
+    </style>
 </head>
-<body>
-    <header class="top-bar">
-        <div class="top-bar-left">
-            <h1 class="logo-text">Baca LN</h1>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-purple-800 to-indigo-900 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5ae08bf0-9960-437e-9093-b11cbdaf7bd2.png" alt="Logo NovaRead - Buku terbuka dengan efek cahaya neon ungu" class="rounded-full" id="site-logo">
+                <h1 class="text-2xl font-bold">NovaRead</h1>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-purple-200">Beranda</a>
+                <a href="#novels" class="hover:text-purple-200">Novel</a>
+                <a href="#genres" class="hover:text-purple-200">Genre</a>
+                <a href="#popular" class="hover:text-purple-200">Populer</a>
+                <a href="#new" class="hover:text-purple-200">Baru</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Cari novel..." class="px-4 py-1 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-300 w-64">
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-purple-700">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button class="md:hidden text-2xl" id="mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="hidden md:flex space-x-2">
+                    <button class="px-4 py-1 bg-purple-600 hover:bg-purple-700 rounded-full text-sm">Login</button>
+                    <button class="px-4 py-1 bg-white text-purple-800 hover:bg-gray-100 rounded-full text-sm">Daftar</button>
+                </div>
+            </div>
         </div>
-        <div class="top-bar-center">
-            <img src="https://png.pngtree.com/png-clipart/20190604/original/pngtree-business-logo-design-png-image_915991.jpg" alt="Logo Baca LN" class="main-logo">
-        </div>
-        <div class="top-bar-right">
-            <label class="switch">
-                <input type="checkbox" id="theme-toggle">
-                <span class="slider round"></span>
-            </label>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-indigo-900 w-full py-2 px-4" id="mobile-menu">
+            <div class="flex flex-col space-y-3">
+                <input type="text" placeholder="Cari novel..." class="px-4 py-2 rounded-full text-gray-800 w-full mb-2">
+                <a href="#home" class="py-2 hover:text-purple-200 border-b border-purple-700">Beranda</a>
+                <a href="#novels" class="py-2 hover:text-purple-200 border-b border-purple-700">Novel</a>
+                <a href="#genres" class="py-2 hover:text-purple-200 border-b border-purple-700">Genre</a>
+                <a href="#popular" class="py-2 hover:text-purple-200 border-b border-purple-700">Populer</a>
+                <a href="#new" class="py-2 hover:text-purple-200 border-b border-purple-700">Baru</a>
+                <div class="flex space-x-2 pt-2">
+                    <button class="px-4 py-1 bg-purple-600 hover:bg-purple-700 rounded-full text-sm w-full">Login</button>
+                    <button class="px-4 py-1 bg-white text-purple-800 hover:bg-gray-100 rounded-full text-sm w-full">Daftar</button>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="main-content">
-        <div class="ln-hero-section">
-            <div class="blurred-bg"></div>
-            <div class="ln-cover-container">
-                <img src="https://phoenixgramedia.id/wp-content/uploads/2024/04/Alya-1-Cover-Depan.jpg" alt="Cover Light Novel" class="ln-cover-image">
-            </div>
-            <div class="ln-info-container">
-                <h2 class="ln-title">Judul Light Novel</h2>
-                <p class="ln-synopsis">
-                    Ini adalah sinopsis singkat dari light novel tersebut. Ceritanya berkisah tentang petualangan epik seorang pahlawan yang harus menyelamatkan dunia dari kegelapan.
-                </p>
-
-                <div class="ln-details">
-                    <table>
-                        <tr>
-                            <td><strong>Title:</strong></td>
-                            <td id="en-title">Light Novel Title</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Judul:</strong></td>
-                            <td id="id-title">Judul Light Novel</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Tanggal Rilis:</strong></td>
-                            <td id="release-date">12 Mei 2025</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Status:</strong></td>
-                            <td><span class="status-badge ongoing">Ongoing</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Penulis:</strong></td>
-                            <td id="author">Nama Penulis</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Genre:</strong></td>
-                            <td>
-                                <span class="genre-badge">Fantasi</span>
-                                <span class="genre-badge">Aksi</span>
-                                <span class="genre-badge">Romansa</span>
-                            </td>
-                        </tr>
-                    </table>
+    <!-- Hero Section -->
+    <section class="py-12 px-4 bg-gradient-to-r from-indigo-50 to-purple-50" id="home">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Temukan Light Novel Favoritmu</h2>
+                <p class="text-lg text-gray-600 mb-6">Baca ribuan light novel berkualitas tinggi secara gratis. Update chapter baru setiap hari dari berbagai penulis berbakat.</p>
+                <div class="flex space-x-4">
+                    <button class="px-6 py-3 bg-purple-700 hover:bg-purple-800 text-white rounded-lg font-medium shadow-lg transition-all">Mulai Membaca</button>
+                    <button class="px-6 py-3 border-2 border-purple-700 text-purple-700 hover:bg-purple-50 rounded-lg font-medium transition-all">Trending Hari Ini</button>
                 </div>
-
-                <div class="language-selector-container">
-                    <label for="language-select">Pilih Bahasa:</label>
-                    <select id="language-select">
-                        <option value="id">Indonesia</option>
-                        <option value="en">English</option>
-                    </select>
+                <div class="mt-8 flex space-x-4 text-gray-600">
+                    <p><i class="fas fa-book-open text-purple-600 mr-1"></i> 10,000+ Novel</p>
+                    <p><i class="fas fa-user-friends text-purple-600 mr-1"></i> 500+ Penulis</p>
+                    <p><i class="fas fa-file-alt text-purple-600 mr-1"></i> 50,000+ Chapter</p>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fee0b820-6472-4165-80f8-5959497ee7a7.png" alt="Koleksi buku light novel dengan sampul berwarna-warni di rak kayu yang terang" class="rounded-lg shadow-xl w-full">
+                <div class="absolute -bottom-4 -left-4 bg-white p-3 rounded-lg shadow-lg hidden md:block">
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f0477008-73f9-47e7-8ada-361c4e7add90.png" alt="Penulis light novel tersenyum di depan laptop" class="rounded-full border-2 border-purple-200 mr-3">
+                        <div>
+                            <p class="font-semibold">Chapter Baru!</p>
+                            <p class="text-sm text-gray-600">"The Rising Hero" Ch. 45</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -top-4 -right-4 bg-white p-2 rounded-full shadow-lg hidden md:block">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-700">
+                        <i class="fas fa-fire text-xl"></i>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="chapter-list-container">
-            <h3>Daftar Bab</h3>
-            <div class="chapter-list" id="id-chapters">
-                <a href="bab_1.html" class="chapter-item">Bab 1: Awal Petualangan</a>
+    <!-- Featured Novels -->
+    <section class="py-12 px-4" id="novels">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">Light Novel Pilihan</h2>
+                <a href="#" class="text-purple-700 hover:text-purple-900 font-medium flex items-center">
+                    Lihat Semua <i class="fas fa-chevron-right ml-1"></i>
+                </a>
             </div>
-            <div class="chapter-list hidden" id="en-chapters">
-                <a href="#" class="chapter-item">Chapter 1: The Beginning of an Adventure</a>
-            </div>
-        </div>
-    </main>
-    
-    <footer class="bottom-bar">
-        <div class="social-media">
-            <a href="https://www.instagram.com/mii_chan02i?igsh=d2JsNTVtcnZnNDJz" target="_blank">
-                <img src="Ihttps://www.pinclipart.com/picdir/middle/1-13590_instagram-logo-insta-logo-png-transparent-background-clipart.png" alt="Instagram">
-            </a>
-            <a href="https://x.com/MII_Chan02I?s=09" target="_blank">
-                <img src="https://toppng.com/public/uploads/preview/twitter-x-new-logo-round-icon-png-11692480241tdbz6jparr.webp" alt="Twitter">
-            </a>
-            <a href="https://www.tiktok.com/@mii_chan02i?_t=ZS-8ywpHjH5Fma&_r=1" target="_blank">
-                <img src="https://static.vecteezy.com/system/resources/previews/006/057/996/original/tiktok-logo-on-transparent-background-free-vector.jpg" alt="TikTok">
-            </a>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Novel 1 -->
+                <div class="novel-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 cursor-pointer">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a3680074-e911-438c-bc81-b1a8e72ccdda.png" alt="Sampul light novel fantasi dengan karakter pria bersenjata pedang di depan istana fantasi" class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute top-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                            Baru
+                        </div>
+                        <div class="absolute top-2 right-2 bg-purple-600 text-white text-xs px-2 py-1 rounded flex items-center">
+                            <i class="fas fa-star mr-1"></i> 4.9
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1 truncate">The Hero's Rebirth</h3>
+                        <p class="text-gray-600 text-sm mb-2 truncate">Penulis: Akira Sora</p>
+                        <div class="flex flex-wrap gap-1 mb-2">
+                            <span class="genre-tag bg-gray-100 text-xs px-2 py-1 rounded">Fantasy</span>
+                            <span class="genre-tag bg-gray-100 text-xs px-2 py-1 rounded">Adventure</span>
+                            <span class="genre-tag bg-gray-100 text-xs px-2 py-1 rounded">Action</span>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-gray-500">
+                            <span>Ch. 125</span>
+                            <span><i class="fas fa-eye mr-1"></i> 124K</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Novel 2 -->
+                <div class="novel-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 cursor-pointer">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bdc28762-0936-4df9-a5a5-9529c8557c0b.png" alt="Sampul light novel romantis dengan latar belakang sekolah dan dua karakter saling memandang" class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-purple-600 text-white text-xs px-2 py-1 rounded flex items-center">
+                            <i class="fas fa-star mr-1"></i> 4.7
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1 truncate">Love in Spring</h3>
+                        <p class="text-gray-600 text-sm mb-2 truncate">Penulis: Hana Ueda</p>
+                        <div class="flex flex-wrap gap-1 mb-2">
+                            <span class="genre-tag bg-gray-100 text-xs px-2 py-1 rounded">Romance</span>
+                            <span class="genre-tag bg-gray-100 text-xs px-2 py-1 rounded">School Life</span>
+                            <span class="genre-tag bg-gray-100 text-xs px-2 py-1 rounded">Slice of Life</span>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-gray-500">
+                            <span>Ch. 85</span>
+                            <span><i class="fas fa-eye mr-1"></i> 98K</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Novel 3 -->
+                <div class="novel-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 cursor-pointer">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/29543133-3894-4c2d-b111-aec85b7bfed3.png" alt="Sampul light novel horor dengan latar belakang rumah tua angker dan siluet bayangan menakutkan" class="w-full h-48 md:h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-purple-600 text-white text-xs px-2 py-1 rounded flex items-center">
+                            <i class="fas fa-star mr-1"></i> 4.8
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1 truncate">The Haunted Mansion</h3>
+                        <p class="text-gray-600 text-sm mb-2 truncate">Penulis: Rei Takahashi</p>
+                        <div class="flex flex-wrap gap-1 mb-2">
+                            <span class="genre-tag bg-gray-100 text-xs px-2 py-1 rounded">Horror</span>
+                            <span class="genre-tag bg-gray-100 text-xs px-2 py-1 rounded">Mystery</span>
+                            <span class="genre-tag bg-gray-100 text-xs px-2 py-1 rounded">Supernatural</span>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-gray-500">
+                            <span>Ch. 42</span>
+                            <span><i class="fas fa-eye mr-1"></i> 156K</span>
+                        </div>
+                    </div>
+                </div
